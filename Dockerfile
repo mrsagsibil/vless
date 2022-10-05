@@ -25,4 +25,4 @@ RUN set -ex \
 ENV TZ=Asia/Shanghai
 COPY config.json /etc/v2ray/config.json
 EXPOSE 3000
-CMD [ "/usr/bin/v2ray", "run", "-format","jsonv5","-config", "/etc/v2ray/config.json" ]
+CMD [ "/usr/bin/v2ray", "run", "-format","json","-config", "/etc/v2ray/config.json" ]
