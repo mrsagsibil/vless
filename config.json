@@ -1,50 +1,39 @@
 {
-  "log": {
-    "access": {
-      "type": "Console",
-      "level": "Debug"
-    },
-    "error": {
-      "type": "Console",
-      "level": "Debug"
-    }
-  },
-  "router": {
-    "domainStrategy": "AsIs",
-    "rule": [
-
-    ],
-    "balancingRule": [
-
-    ]
-  },
   "inbounds": [
     {
+      "port": 3000,
       "protocol": "vless",
       "settings": {
-        "users": [
-          "f3d1bc9d-42fb-e0a3-1d7a-28f5298d92aa"
+        "decryption": "none",
+        "clients": [
+          {
+            "id": "b831381d-6324-4d53-ad4f-8cda48b30815",
+            "email": "nab@nobody.god"
+          }
         ]
       },
-      "port": "3000",
-      "listen": "0.0.0.0",
-      "tag": "IN",
-      "sniffing": {
-
-      },
       "streamSettings": {
-        "transport": "ws",
-        "transportSettings": {
-          "path": "/"
-        },
-        "security": "none",
-        "securitySettings": {
-
+        "network": "ws",
+        "wsSettings": {
+          "path": "/up"
         }
       }
     }
   ],
   "outbounds": [
-// Outbound here
-  ]
+   // Config here
+    {
+      "protocol": "freedom",
+      "tag": "direct",
+      "settings": {}
+    }
+  ],
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules": [{
+      "type": "field",
+      "ip": ["geoip:ir"],
+      "outboundTag": "direct"
+    }]
+  }
 }
